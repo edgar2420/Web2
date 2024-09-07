@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Hamburguesas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Lista de Hamburguesas</h1>
+
+        <!-- Botón para agregar una nueva hamburguesa -->
+        <a href="/hamburguesas/crear" class="btn btn-primary mb-3">Agregar Hamburguesa</a>
+
+        <!-- Tabla para listar todas las hamburguesas -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Foto</th>
+                    <th>Precio</th>
+                    <th>Restaurante</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% hamburguesas.forEach(hamburguesa => { %>
+                    <tr>
+                        <td><%= hamburguesa.nombre %></td>
+                        <td><%= hamburguesa.descripcion %></td>
+                        <td><img src="<%= hamburguesa.foto %>" alt="Foto de <%= hamburguesa.nombre %>" width="100"></td>
+                        <td>$<%= hamburguesa.precio %></td>
+                        <td><%= hamburguesa.restaurante ? hamburguesa.restaurante.nombre : 'N/A' %></td>
+                        <td>
+                            <a href="/hamburguesas/editar/<%= hamburguesa.id %>" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="/hamburguesas/eliminar/<%= hamburguesa.id %>" method="POST" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
